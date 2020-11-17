@@ -19,10 +19,10 @@ class   e32ttl(object):
     bytesize = serial.EIGHTBITS
     parity = serial.PARITY_NONE
     stopbits = serial.STOPBITS_ONE
-    timeout = 0
+    timeout = None
     serial_object = None
 
-    def __init__(self, interface=DEFAULT_INTERFACE, m0_pin=DEFAULT_M0_PIN, m1_pin=DEFAULT_M1_PIN, aux_pin=DEFAULT_AUX_PIN, baudrate=9600, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=0):
+    def __init__(self, interface=DEFAULT_INTERFACE, m0_pin=DEFAULT_M0_PIN, m1_pin=DEFAULT_M1_PIN, aux_pin=DEFAULT_AUX_PIN, baudrate=9600, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=None):
         self.interface = interface
         self.m0_pin = m0_pin
         self.m1_pin = m1_pin
