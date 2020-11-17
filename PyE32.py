@@ -19,9 +19,10 @@ class   e32ttl(object):
     bytesize = serial.EIGHTBITS
     parity = serial.PARITY_NONE
     stopbits = serial.STOPBITS_ONE
+    timeout = 0
     serial_object = None
 
-    def __init__(self, interface, m0_pin, m1_pin, aux_pin, baudrate=9600, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE):
+    def __init__(self, interface=DEFAULT_INTERFACE, m0_pin=DEFAULT_M0_PIN, m1_pin=DEFAULT_M1_PIN, aux_pin=DEFAULT_AUX_PIN, baudrate=9600, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, timeout=0):
         self.interface = interface
         self.m0_pin = m0_pin
         self.m1_pin = m1_pin
@@ -30,6 +31,7 @@ class   e32ttl(object):
         self.bytesize = bytesize
         self.parity = parity
         self.stopbits = stopbits
+        self.timeout = timeout
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.m0_pin, GPIO.OUT)
@@ -38,11 +40,12 @@ class   e32ttl(object):
 
         try:
             self.serial_object = serial.Serial(
-                interface=self.interface,
+                port=self.interface,
                 baudrate=self.baudrate,
                 bytesize=self.bytesize,
                 parity=self.parity,
-                stopbits=self.stopbits
+                stopbits=self.stopbits,
+                timeout=self.timeout
             )
         except:
             print("Error in opening serial interface, check parameters.")
