@@ -5,10 +5,10 @@ DEFAULT_INTERFACE = "/dev/serial0"
 DEFAULT_M0_PIN = 23
 DEFAULT_M1_PIN = 24
 DEFAULT_AUX_PIN = 18
-MODE_NORMAL = 1
-MODE_WAKE_UP = 2
-MODE_POWERSAVE = 3
-MODE_PROG_SLEEP = 4
+MODE_NORMAL = 0
+MODE_WAKE_UP = 1
+MODE_POWERSAVE = 2
+MODE_PROG_SLEEP = 3
 
 class   e32ttl(object):
     interface = DEFAULT_INTERFACE
@@ -81,9 +81,21 @@ class   e32ttl(object):
         recv += self.serial_object.read(self.serial_object.in_waiting)
         return recv.decode('utf-8')
 
+    def receiveBytes(self):
+        if self.serial_object == None:
+            print("Interface is not initialised.")
+            return 1
+        recv = self.serial_object.read()
+        recv += self.serial_object.read(self.serial_object.in_waiting)
+        recv = recv.replace('\n', '')
+        return recv
+
     def sendMessage(self, msg):
         if self.serial_object == None:
             print("Interface is not initialised.")
             return 1
         print('todo')
 
+    def close(self):
+        GPIO.cleanup()
+        return 0
