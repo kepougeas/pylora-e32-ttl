@@ -79,7 +79,9 @@ class   e32ttl(object):
             return 1
         recv = self.serial_object.read()
         recv += self.serial_object.read(self.serial_object.in_waiting)
-        return recv.decode('utf-8')
+        recv = recv.decode('utf-8')
+        recv = recv.replace('\n', '')
+        return recv
 
     def receiveBytes(self):
         if self.serial_object == None:
@@ -87,7 +89,6 @@ class   e32ttl(object):
             return 1
         recv = self.serial_object.read()
         recv += self.serial_object.read(self.serial_object.in_waiting)
-        recv = recv.replace('\n', '')
         return recv
 
     def sendMessage(self, msg):
