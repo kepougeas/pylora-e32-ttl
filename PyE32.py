@@ -77,7 +77,7 @@ class   e32ttl(object):
         if self.serial_object == None:
             print("Interface is not initialised.")
             return 1
-        recv = ""
+        recv = bytes()
         while GPIO.input(self.aux_pin) == GPIO.LOW:
             recv += self.serial_object.read()
         recv = recv.decode('utf-8')
